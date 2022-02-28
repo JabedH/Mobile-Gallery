@@ -1,0 +1,19 @@
+#set-color{
+    color: #FF9600;
+    font-size: 25px;
+}
+span{
+    color: #FF9600;
+}
+.position{
+    position: relative;
+}
+.error-color{
+    position: absolute;
+    color: red;
+    margin-top: 45px;
+}
+.total{
+    text-align: center;
+    width: 50%;
+}
