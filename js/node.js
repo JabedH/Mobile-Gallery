@@ -5,6 +5,7 @@ const getValue = () => {
   const searchField = document.getElementById("searchValue");
   const searchValue = searchField.value;
   searchField.value = "";
+  // value checker
   if (!isNaN(searchValue) || searchValue == "") {
     error.innerText = "Please search by name";
   } else {
@@ -13,7 +14,7 @@ const getValue = () => {
     )
       .then((res) => res.json())
       .then((data) => searchItems(data));
-    error1.innerText = "";
+    error.innerText = "";
   }
   const searchItems = (searchMobiles) => {
     if (searchMobiles.status == false) {
@@ -24,9 +25,10 @@ const getValue = () => {
       )
         .then((res) => res.json())
         .then((data) => searchItems(data.data.slice(0, 20)));
+      error1.innerText = "";
     }
+    // show 20 phones on display
     const searchItems = (searchMobiles) => {
-      console.log(searchMobiles);
       searchMobiles.forEach((searchMobile) => {
         const addToCart = document.getElementById("addToCart");
         const div = document.createElement("div");
@@ -49,7 +51,7 @@ const getValue = () => {
     };
   };
 };
-// addId
+// show phone details
 const getMobileId = (mobilesId) => {
   console.log(mobilesId);
   fetch(`https://openapi.programming-hero.com/api/phone/${mobilesId}`)
@@ -66,65 +68,61 @@ const showMobileId = (idDetails) => {
     const newReleaseDate = "Not found Release Date";
     div.innerHTML = `
   <div class="card p-2" style="width: 20rem;">
-  <div class="d-flex justify-content-center">
-       <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
+    <div class="d-flex justify-content-center">
+         <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">${idDetails.name}</h5>
+      <p>${newReleaseDate}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"> 
+        <b>ChipSet: </b>  ${idDetails.mainFeatures.chipSet} <br>
+        <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize} <br>
+        <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
+        <b>Storage: </b>  ${idDetails.mainFeatures.sensors} <br>
+      </li>
+      <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
+      <li class="list-group-item"> 
+        <b>Bluetooth: </b>  ${idDetails?.others?.Bluetooth} <br>
+        <b>GPS: </b>  ${idDetails?.others?.GPS} <br>
+        <b>NFC: </b>  ${idDetails?.others?.NFC} <br>
+        <b>Radio: </b>  ${idDetails?.others?.Radio} <br>
+        <b>USB: </b>  ${idDetails?.others?.USB} <br>
+        <b>WLAN: </b>  ${idDetails?.others?.WLAN} 
+      </li>
+    </ul>
   </div>
-  <div class="card-body">
-    <h5 class="card-title">${idDetails.name}</h5>
-    <p>${newReleaseDate}</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item"> 
-
-    <b>ChipSet: </b>  ${idDetails.mainFeatures.chipSet} <br>
-    <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize} <br>
-    <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
-    <b>Storage: </b>  ${idDetails.mainFeatures.sensors} <br>
-    </li>
-    <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
-    <li class="list-group-item"> 
-
-    <b>Bluetooth: </b>  ${idDetails?.others?.Bluetooth} <br>
-    <b>GPS: </b>  ${idDetails?.others?.GPS} <br>
-    <b>NFC: </b>  ${idDetails?.others?.NFC} <br>
-    <b>Radio: </b>  ${idDetails?.others?.Radio} <br>
-    <b>USB: </b>  ${idDetails?.others?.USB} <br>
-    <b>WLAN: </b>  ${idDetails?.others?.WLAN} 
-    </li>
-  </ul>
-</div>
   `;
     addMobileId.appendChild(div);
   } else {
     div.innerHTML = `
   <div class="card p-2" style="width: 20rem;">
-  <div class="d-flex justify-content-center">
-       <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
+    <div class="d-flex justify-content-center">
+         <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">${idDetails.name}</h5>
+      <p>${idDetails.releaseDate}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"> 
+        <b>ChipSet: </b>  ${idDetails.mainFeatures.chipSet} <br>
+        <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize} <br>
+        <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
+        <b>Storage: </b>  ${idDetails.mainFeatures.sensors} <br>
+        </li>
+      <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
+      <li class="list-group-item"> 
+        <b>Bluetooth: </b>  ${idDetails?.others?.Bluetooth} <br>
+        <b>GPS: </b>  ${idDetails?.others?.GPS} <br>
+        <b>NFC: </b>  ${idDetails?.others?.NFC} <br>
+        <b>Radio: </b>  ${idDetails?.others?.Radio} <br>
+        <b>USB: </b>  ${idDetails?.others?.USB} <br>
+        <b>WLAN: </b>  ${idDetails?.others?.WLAN} 
+      </li>
+    </ul> 
   </div>
-  <div class="card-body">
-    <h5 class="card-title">${idDetails.name}</h5>
-    <p>${idDetails.releaseDate}</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item"> 
-
-    <b>ChipSet: </b>  ${idDetails.mainFeatures.chipSet} <br>
-    <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize} <br>
-    <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
-    <b>Storage: </b>  ${idDetails.mainFeatures.sensors} <br>
-    </li>
-    <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
-    <li class="list-group-item"> 
-
-    <b>Bluetooth: </b>  ${idDetails?.others?.Bluetooth} <br>
-    <b>GPS: </b>  ${idDetails?.others?.GPS} <br>
-    <b>NFC: </b>  ${idDetails?.others?.NFC} <br>
-    <b>Radio: </b>  ${idDetails?.others?.Radio} <br>
-    <b>USB: </b>  ${idDetails?.others?.USB} <br>
-    <b>WLAN: </b>  ${idDetails?.others?.WLAN} 
-    </li>
-  </ul>
-</div>
   `;
     addMobileId.appendChild(div);
   }
