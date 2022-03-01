@@ -112,7 +112,7 @@ const showMobileId = idDetails => {
             <h5 class="card-title">MainFeatures: ${idDetails.mainFeatures.displaySize}</h5>
             <h5 class="card-title">Storage: ${idDetails.mainFeatures.storage}</h5>
             <h5 class="card-title">ReleaseDate: <b></b> ${newReleaseDate}</h5>
-            <p> <b class="fs-3"> sensors:</b>  ${idDetails.mainFeatures.sensors}</p>
+            <p> <b class="fs-3"> sensors:</b>  ${sensor}</p>
           </div>
         </div>
       </div>
@@ -127,21 +127,20 @@ const showMobileId = idDetails => {
     <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
     <div class="card-body">
       <h5 class="card-title">${idDetails.name}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <p>${idDetails.releaseDate}</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"> <b>ReleaseDate: </b> <p>${idDetails.releaseDate}</p> </li>
       <li class="list-group-item"> <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize}</li>
       <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
       <li class="list-group-item"> 
-      <b>Bluetooth: </b>  ${idDetails.others.Bluetooth} <br>
-      <b>GPS: </b>  ${idDetails.others.GPS} <br>
-      <b>NFC: </b>  ${idDetails.others.NFC} <br>
-      <b>Radio: </b>  ${idDetails.others.Radio} <br>
-      <b>USB: </b>  ${idDetails.others.USB} <br>
-      <b>WLAN: </b>  ${idDetails.others.WLAN} 
+
+      <b>Bluetooth: </b>  ${idDetails?.others?.Bluetooth} <br>
+      <b>GPS: </b>  ${idDetails?.others?.GPS} <br>
+      <b>NFC: </b>  ${idDetails?.others?.NFC} <br>
+      <b>Radio: </b>  ${idDetails?.others?.Radio} <br>
+      <b>USB: </b>  ${idDetails?.others?.USB} <br>
+      <b>WLAN: </b>  ${idDetails?.others?.WLAN} 
       </li>
-      <li class="list-group-item">A third item</li>
     </ul>
   </div>
     `
