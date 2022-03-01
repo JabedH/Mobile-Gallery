@@ -123,14 +123,22 @@ const showMobileId = idDetails => {
   else{
     div.innerHTML =
     `
-    <div class="card p-2" style="width: 18rem;">
-    <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
+    <div class="card p-2" style="width: 20rem;">
+    <div class="d-flex justify-content-center">
+         <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
+    </div>
     <div class="card-body">
       <h5 class="card-title">${idDetails.name}</h5>
       <p>${idDetails.releaseDate}</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"> <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize}</li>
+      <li class="list-group-item"> 
+
+      <b>ChipSet: </b>  ${idDetails.mainFeatures.chipSet} <br>
+      <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize} <br>
+      <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
+      <b>Storage: </b>  ${idDetails.mainFeatures.sensors} <br>
+      </li>
       <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
       <li class="list-group-item"> 
 
