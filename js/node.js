@@ -14,11 +14,16 @@ const getValue = () => {
     )
       .then((res) => res.json())
       .then((data) => searchItems(data));
+    // spinner
+    if ((onclick = "getValue()")) {
+      document.getElementById("spinner").style.display = "block";
+    }
     error.innerText = "";
   }
   const searchItems = (searchMobiles) => {
     if (searchMobiles.status == false) {
       error1.innerText = "Phone is not found";
+      document.getElementById("spinner").style.display = "none";
     } else {
       fetch(
         `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
@@ -47,6 +52,10 @@ const getValue = () => {
       </div>
     </div>`;
         addToCart.appendChild(div);
+        // spinner
+        if ((onclick = "getValue()")) {
+          document.getElementById("spinner").style.display = "none";
+        }
       });
     };
   };

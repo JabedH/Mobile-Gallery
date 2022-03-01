@@ -22,3 +22,6 @@ span {
   text-align: center;
   width: 50%;
 }
+#spinner {
+  display: none;
+}
