@@ -51,7 +51,6 @@ const searchItems = searchMobiles =>{
         .then(data => searchItems(data.data.slice(0, 20)))
         
       }
-      
       const searchItems = searchMobiles =>{
         console.log(searchMobiles)
         searchMobiles.forEach(searchMobile =>{
@@ -73,6 +72,7 @@ const searchItems = searchMobiles =>{
         </div>
       </div>`
       addToCart.appendChild(div)
+      
       
       // Display none
       if(onclick="getValue()"){
@@ -100,8 +100,8 @@ const showMobileId = idDetails => {
   if(idDetails.releaseDate== ""){
     const newReleaseDate = 'not found'
     div.innerHTML =
-    `
-    <div class="card mb-3 border border-info" style="max-width: 700px;">
+
+    `<div class="card mb-3 border border-info" style="max-width: 1000px;">
       <div class="row g-0">
         <div class="col-md-4">
           <img src="${idDetails.image}" class="img-fluid rounded-start p-1" alt="...">
@@ -109,10 +109,10 @@ const showMobileId = idDetails => {
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">${idDetails.name}</h5>
-            <h5 class="card-title">MainFeatures: ${ idDetails.mainFeatures.displaySize}</h5>
-            <h5 class="card-title">Storage: ${ idDetails.mainFeatures.storage}</h5>
-            <h5 class="card-title">Storage: ReleaseDate: ${newReleaseDate}</h5>
-            <h5 class="card-title"><small class="text-muted">sensors: ${idDetails.mainFeatures.sensors}</small></h5>
+            <h5 class="card-title">MainFeatures: ${idDetails.mainFeatures.displaySize}</h5>
+            <h5 class="card-title">Storage: ${idDetails.mainFeatures.storage}</h5>
+            <h5 class="card-title">ReleaseDate: <b></b> ${newReleaseDate}</h5>
+            <p> <b class="fs-3"> sensors:</b>  ${idDetails.mainFeatures.sensors}</p>
           </div>
         </div>
       </div>
@@ -122,24 +122,29 @@ const showMobileId = idDetails => {
   }
   else{
     div.innerHTML =
-  `
-  <div class="card mb-3 border border-info" style="max-width: 700px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="${idDetails.image}" class="img-fluid rounded-start p-1" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">${idDetails.name}</h5>
-          <h5 class="card-title">MainFeatures: ${ idDetails.mainFeatures.displaySize}</h5>
-          <h5 class="card-title">Storage: ${ idDetails.mainFeatures.storage}</h5>
-          <h5 class="card-title">releaseDate: ${ idDetails.releaseDate}</h5>
-          <h5 class="card-title"><small class="text-muted">sensors: ${idDetails.mainFeatures.sensors}</small></h5>
-        </div>
-      </div>
+    `
+    <div class="card p-2" style="width: 18rem;">
+    <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${idDetails.name}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"> <b>ReleaseDate: </b> <p>${idDetails.releaseDate}</p> </li>
+      <li class="list-group-item"> <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize}</li>
+      <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
+      <li class="list-group-item"> 
+      <b>Bluetooth: </b>  ${idDetails.others.Bluetooth} <br>
+      <b>GPS: </b>  ${idDetails.others.GPS} <br>
+      <b>NFC: </b>  ${idDetails.others.NFC} <br>
+      <b>Radio: </b>  ${idDetails.others.Radio} <br>
+      <b>USB: </b>  ${idDetails.others.USB} <br>
+      <b>WLAN: </b>  ${idDetails.others.WLAN} 
+      </li>
+      <li class="list-group-item">A third item</li>
+    </ul>
   </div>
-  `
+    `
   addMobileId.appendChild(div)
   }
 }
