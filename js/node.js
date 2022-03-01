@@ -82,18 +82,21 @@ const getMobileId = mobilesId =>{
 const showMobileId = idDetails => {
   console.log(idDetails)
   const addMobileId = document.getElementById('addMobileId')
+  addMobileId.innerHTML = '';
   const div = document.createElement('div')
   div.innerHTML =
   `
-  <div class="card mb-3" style="max-width: 540px;">
+  <div class="card mb-3 border border-info" style="max-width: 700px;">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="${idDetails.image}" class="img-fluid rounded-start" alt="...">
+        <img src="${idDetails.image}" class="img-fluid rounded-start p-1" alt="...">
       </div>
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">${idDetails.name}</h5>
-          <p class="card-text"><small class="text-muted"></small></p>
+          <h5 class="card-title">MainFeatures: ${ idDetails.mainFeatures.displaySize}</h5>
+          <h5 class="card-title">Storage: ${ idDetails.mainFeatures.storage}</h5>
+          <h5 class="card-title"><small class="text-muted">sensors: ${idDetails.mainFeatures.sensors}</small></h5>
         </div>
       </div>
     </div>
