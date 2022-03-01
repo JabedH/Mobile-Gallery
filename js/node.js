@@ -5,6 +5,7 @@ const getMobileApi =() =>{
 } 
 getMobileApi()
 const addMobileApi = mobileApis =>{
+  console.log(mobileApis)
     mobileApis.forEach(mobileApi=>{
     const addMobile = document.getElementById('addMobile')
     const div = document.createElement('div')
@@ -32,48 +33,177 @@ const getValue = ()=>{
   searchField.value =""
   if(!isNaN(searchValue) || searchValue == ''){
     error.innerText = 'Please search by name'
+    
   }
   
-  else{
-    fetch(`https://openapi.programming-hero.com/api/phones?search=${searchValue}`)
-    .then( res => res.json())
-    .then(data => searchItems(data.data.slice(0, 20)))
-    error.innerText ='';
-    if(searchValue == false){
-      error1.innerText = 'Not Found'
-    }
-  }
-  const searchItems = searchMobiles =>{
-    searchMobiles.forEach(searchMobile =>{
-      console.log(searchMobile)
-      const addToCart = document.getElementById('addToCart')
-      const div = document.createElement('div')
-    div.innerHTML =
-    `<div class="col ">
-    <div class="card h-50 border-0 ">
-    <div class="d-flex justify-content-center">
-       <img src="${searchMobile.image}" class="text-center w-50 card-img-top" alt="...">
+//   else{
+//     let temp;
+//     fetch(`https://openapi.programming-hero.com/api/phones?search=${searchValue}`)
+//     .then( res => res.json())
+//     .then(data => temp = data )
+//     if(temp === undefined){
+//       error1.innerText = 'not found'
+//     }
+    
+//     else{
+//       const searchItems = searchMobiles =>{
+//         searchMobiles.forEach(searchMobile =>{
+//           console.log(searchMobile)
+//           const addToCart = document.getElementById('addToCart')
+//           const div = document.createElement('div')
+//         div.innerHTML =
+//         `<div class="col ">
+//         <div class="card h-50 border-0 ">
+//         <div class="d-flex justify-content-center">
+//            <img src="${searchMobile.image}" class="text-center w-50 card-img-top" alt="...">
+//         </div>
+//           <div class="card-body">
+//             <h5 class="card-title text-center">${searchMobile.phone_name}</h5>
+//             <h5 class="card-title text-center">brand: ${searchMobile.brand}</h5>
+//           </div>
+//           <div class="text-center">
+//           <a href="#" onclick="getMobileId('${searchMobile.slug}')" class=" text-center btn btn-primary ">More Details</a>
+//           </div>
+//         </div>
+//       </div>`
+//       addToCart.appendChild(div)
+    
+//     // Display none
+//       if(onclick="getValue()"){
+//         document.getElementById('hideLatestPhone').style.display = 'none'
+//         // document.getElementById('hideCarousel').style.display = 'none'
+//       }
+//         } )
+//       }
+//     }
+
+//   }
+// }
+// ------------------------------
+// else{
+//   fetch(`https://openapi.programming-hero.com/api/phones?search=${searchValue}`)
+//   .then( res => res.json())
+//   .then(data => searchItems(data.data.slice(0, 20)))
+//   error.innerText ='';
+  
+// }
+
+// const searchItems = searchMobiles =>{
+//   if(searchItems.length === undefined){
+//     error1.innerText = 'not found'
+//     }
+//   searchMobiles.forEach(searchMobile =>{
+//     console.log(searchMobile)
+//     const addToCart = document.getElementById('addToCart')
+//     const div = document.createElement('div')
+//   div.innerHTML =
+//   `<div class="col ">
+//   <div class="card h-50 border-0 ">
+//   <div class="d-flex justify-content-center">
+//      <img src="${searchMobile.image}" class="text-center w-50 card-img-top" alt="...">
+//   </div>
+//     <div class="card-body">
+//       <h5 class="card-title text-center">${searchMobile.phone_name}</h5>
+//       <h5 class="card-title text-center">brand: ${searchMobile.brand}</h5>
+//     </div>
+//     <div class="text-center">
+//     <a href="#" onclick="getMobileId('${searchMobile.slug}')" class=" text-center btn btn-primary ">More Details</a>
+//     </div>
+//   </div>
+// </div>`
+// addToCart.appendChild(div)
+
+// // Display none
+// if(onclick="getValue()"){
+//   document.getElementById('hideLatestPhone').style.display = 'none'
+//   // document.getElementById('hideCarousel').style.display = 'none'
+// }
+//   } )
+// }
+
+// }
+
+// --------
+else{
+  fetch(`https://openapi.programming-hero.com/api/phones?search=${searchValue}`)
+  .then( res => res.json())
+  .then(data => searchItems(data.data.slice(0, 20)))
+  error.innerText ='';
+}
+
+const searchItems = searchMobiles =>{
+  console.log(searchMobiles)
+  searchMobiles.forEach(searchMobile =>{
+    // console.log(searchMobile.slug)
+    const addToCart = document.getElementById('addToCart')
+    const div = document.createElement('div')
+  div.innerHTML =
+  `<div class="col ">
+  <div class="card h-50 border-0 ">
+  <div class="d-flex justify-content-center">
+     <img src="${searchMobile.image}" class="text-center w-50 card-img-top" alt="...">
+  </div>
+    <div class="card-body">
+      <h5 class="card-title text-center">${searchMobile.phone_name}</h5>
+      <h5 class="card-title text-center">brand: ${searchMobile.brand}</h5>
     </div>
-      <div class="card-body">
-        <h5 class="card-title text-center">${searchMobile.phone_name}</h5>
-        <h5 class="card-title text-center">brand: ${searchMobile.brand}</h5>
-      </div>
-      <div class="text-center">
-      <a href="#" onclick="getMobileId('${searchMobile.slug}')" class=" text-center btn btn-primary ">More Details</a>
-      </div>
+    <div class="text-center">
+    <a href="#" onclick="getMobileId('${searchMobile.slug}')" class=" text-center btn btn-primary ">More Details</a>
     </div>
-  </div>`
-  addToCart.appendChild(div)
+  </div>
+</div>`
+addToCart.appendChild(div)
 
 // Display none
-  if(onclick="getValue()"){
-    document.getElementById('hideLatestPhone').style.display = 'none'
-    // document.getElementById('hideCarousel').style.display = 'none'
-  }
-    } )
-  }
-  
+if(onclick="getValue()"){
+  document.getElementById('hideLatestPhone').style.display = 'none'
+  // document.getElementById('hideCarousel').style.display = 'none'
 }
+  } )
+}
+
+}
+// ------------------------
+// else{
+//   fetch(`https://openapi.programming-hero.com/api/phones?search=${searchValue}`)
+//   .then( res => res.json())
+//   .then(data => searchItems(data.data.slice(0, 20)))
+//   error.innerText ='';
+// }
+
+// const searchItems = searchMobiles =>{
+//   console.log(searchMobiles)
+//   searchMobiles.forEach(searchMobile =>{
+//     // console.log(searchMobile.slug)
+//     const addToCart = document.getElementById('addToCart')
+//     const div = document.createElement('div')
+//   div.innerHTML =
+//   `<div class="col ">
+//   <div class="card h-50 border-0 ">
+//   <div class="d-flex justify-content-center">
+//      <img src="${searchMobile.image}" class="text-center w-50 card-img-top" alt="...">
+//   </div>
+//     <div class="card-body">
+//       <h5 class="card-title text-center">${searchMobile.phone_name}</h5>
+//       <h5 class="card-title text-center">brand: ${searchMobile.brand}</h5>
+//     </div>
+//     <div class="text-center">
+//     <a href="#" onclick="getMobileId('${searchMobile.slug}')" class=" text-center btn btn-primary ">More Details</a>
+//     </div>
+//   </div>
+// </div>`
+// addToCart.appendChild(div)
+
+// // Display none
+// if(onclick="getValue()"){
+//   document.getElementById('hideLatestPhone').style.display = 'none'
+//   // document.getElementById('hideCarousel').style.display = 'none'
+// }
+//   } )
+// }
+
+// }
+// ---------------------------
 // addId
 const getMobileId = mobilesId =>{
   console.log(mobilesId)
@@ -82,6 +212,7 @@ const getMobileId = mobilesId =>{
   .then(data => showMobileId(data.data))
 }
 const showMobileId = idDetails => {
+  console.log(idDetails)
   console.log(idDetails.releaseDate)
   const addMobileId = document.getElementById('addMobileId')
   addMobileId.innerHTML = '';
