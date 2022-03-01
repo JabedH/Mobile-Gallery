@@ -17,7 +17,7 @@ const getValue = () => {
   }
   const searchItems = (searchMobiles) => {
     if (searchMobiles.status == false) {
-      error1.innerText = "not found";
+      error1.innerText = "Phone is not found";
     } else {
       fetch(
         `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
