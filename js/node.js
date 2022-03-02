@@ -1,4 +1,3 @@
-// search section
 const getValue = () => {
   const error = document.getElementById("error");
   const error1 = document.getElementById("error1");
@@ -9,45 +8,49 @@ const getValue = () => {
   if (!isNaN(searchValue) || searchValue == "") {
     error.innerText = "Please search by name";
   } else {
+    let temp;
     fetch(
       `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
     )
       .then((res) => res.json())
-      .then((data) => searchItems(data));
+      .then((data) => {
+        temp = data;
+        console.log("temp", temp);
+        if (temp.status == false) {
+          error1.innerText = "Phone is not found";
+          document.getElementById("spinner").style.display = "none";
+          document.getElementById("hideAddToCart").style.display = "none";
+          document.getElementById("hideAddMobileId").style.display = "none";
+        } else {
+          fetch(
+            `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
+          )
+            .then((res) => res.json())
+            .then((data) => getItems(data.data.slice(0, 20)));
+          //
+          if (temp.status == true) {
+            document.getElementById("hideAddToCart").style.display = "block";
+            document.getElementById("hideAddMobileId").style.display = "block";
+          }
+          error1.innerText = "";
+        }
+      });
     // spinner
     if ((onclick = "getValue()")) {
       document.getElementById("spinner").style.display = "block";
     }
     error.innerText = "";
   }
-  const searchItems = (searchMobiles) => {
-    // phone checker
-    if (searchMobiles.status == false) {
-      error1.innerText = "Phone is not found";
-      document.getElementById("spinner").style.display = "none";
-      document.getElementById("hideAddToCart").style.display = "none";
-      document.getElementById("hideAddMobileId").style.display = "none";
-    } else {
-      fetch(
-        `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
-      )
-        .then((res) => res.json())
-        .then((data) => searchItems(data.data.slice(0, 20)));
-      //
-      if (searchMobiles.status == true) {
-        document.getElementById("hideAddToCart").style.display = "block";
-        document.getElementById("hideAddMobileId").style.display = "block";
-      }
-      error1.innerText = "";
-    }
-    // show 20 phones on display
-    const searchItems = (searchMobiles) => {
-      searchMobiles.forEach((searchMobile) => {
-        console.log(searchMobile);
-        const addToCart = document.getElementById("addToCart");
-        // addToCart.innerHTML = "";-
-        const div = document.createElement("div");
-        div.innerHTML = `<div class="col ">
+};
+
+// show 20 phones on display
+const getItems = (searchMobiles) => {
+  const addToCart = document.getElementById("addToCart");
+  addToCart.innerHTML = "";
+  searchMobiles.forEach((searchMobile) => {
+    console.log(searchMobile);
+    const div = document.createElement("div");
+    div.innerHTML = `<div class="col ">
       <div class="card h-50 border-0 ">
       <div class="d-flex justify-content-center">
          <img src="${searchMobile.image}" class="text-center w-50 card-img-top" alt="...">
@@ -61,14 +64,12 @@ const getValue = () => {
         </div>
       </div>
     </div>`;
-        addToCart.appendChild(div);
-        // spinner
-        if ((onclick = "getValue()")) {
-          document.getElementById("spinner").style.display = "none";
-        }
-      });
-    };
-  };
+    addToCart.appendChild(div);
+    // spinner
+    if ((onclick = "getValue()")) {
+      document.getElementById("spinner").style.display = "none";
+    }
+  });
 };
 
 // show phone details
@@ -80,12 +81,12 @@ const getMobileId = (mobilesId) => {
 };
 const showMobileId = (idDetails) => {
   console.log(idDetails);
-  console.log(idDetails.releaseDate);
   const addMobileId = document.getElementById("addMobileId");
   addMobileId.innerHTML = "";
   const div = document.createElement("div");
   if (idDetails.releaseDate == "") {
     const newReleaseDate = "Not found Release Date";
+    const itemDetails = "Not found";
     div.innerHTML = `
   <div class="card p-2" style="width: 20rem;">
     <div class="d-flex justify-content-center">
@@ -102,20 +103,35 @@ const showMobileId = (idDetails) => {
         <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
         <b>Storage: </b>  ${idDetails.mainFeatures.storage} <br>
       </li>
-      <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
+      <li class="list-group-item"> <b>Sensors: </b>  ${
+        idDetails.mainFeatures.sensors
+      }</li>
       <li class="list-group-item"> 
-        <b>Bluetooth: </b>  ${idDetails?.others?.Bluetooth} <br>
-        <b>GPS: </b>  ${idDetails?.others?.GPS} <br>
-        <b>NFC: </b>  ${idDetails?.others?.NFC} <br>
-        <b>Radio: </b>  ${idDetails?.others?.Radio} <br>
-        <b>USB: </b>  ${idDetails?.others?.USB} <br>
-        <b>WLAN: </b>  ${idDetails?.others?.WLAN} 
+        <b>Bluetooth: </b>  ${
+          idDetails.others ? idDetails.others.Bluetooth : "not found"
+        } <br>
+        <b>GPS: </b>   ${
+          idDetails.others ? idDetails.others.GPS : "not found"
+        } <br>
+        <b>NFC: </b>   ${
+          idDetails.others ? idDetails.others.NFC : "not found"
+        } <br>
+        <b>Radio: </b>   ${
+          idDetails.others ? idDetails.others.Radio : "not found"
+        } <br>
+        <b>USB: </b>   ${
+          idDetails.others ? idDetails.others.USB : "not found"
+        } <br>
+        <b>WLAN: </b>   ${
+          idDetails.others ? idDetails.others.WLAN : "not found"
+        } 
       </li>
     </ul>
   </div>
   `;
     addMobileId.appendChild(div);
   } else {
+    console.log(idDetails);
     div.innerHTML = `
   <div class="card p-2" style="width: 20rem;">
     <div class="d-flex justify-content-center">
@@ -132,14 +148,28 @@ const showMobileId = (idDetails) => {
         <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
         <b>Storage: </b>  ${idDetails.mainFeatures.storage} <br>
         </li>
-      <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
+      <li class="list-group-item"> <b>Sensors: </b>  ${
+        idDetails.mainFeatures.sensors
+      }</li>
       <li class="list-group-item"> 
-        <b>Bluetooth: </b>  ${idDetails?.others?.Bluetooth} <br>
-        <b>GPS: </b>  ${idDetails?.others?.GPS} <br>
-        <b>NFC: </b>  ${idDetails?.others?.NFC} <br>
-        <b>Radio: </b>  ${idDetails?.others?.Radio} <br>
-        <b>USB: </b>  ${idDetails?.others?.USB} <br>
-        <b>WLAN: </b>  ${idDetails?.others?.WLAN} 
+        <b>Bluetooth: </b>  ${
+          idDetails.others ? idDetails.others.Bluetooth : "not found"
+        } <br>
+        <b>GPS: </b>   ${
+          idDetails.others ? idDetails.others.GPS : "not found"
+        } <br>
+        <b>NFC: </b>   ${
+          idDetails.others ? idDetails.others.NFC : "not found"
+        } <br>
+        <b>Radio: </b>   ${
+          idDetails.others ? idDetails.others.Radio : "not found"
+        } <br>
+        <b>USB: </b>   ${
+          idDetails.others ? idDetails.others.USB : "not found"
+        } <br>
+        <b>WLAN: </b>   ${
+          idDetails.others ? idDetails.others.WLAN : "not found"
+        } 
       </li>
     </ul> 
   </div>
