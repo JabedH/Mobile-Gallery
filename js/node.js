@@ -24,18 +24,26 @@ const getValue = () => {
     if (searchMobiles.status == false) {
       error1.innerText = "Phone is not found";
       document.getElementById("spinner").style.display = "none";
+      document.getElementById("hideAddToCart").style.display = "none";
+      document.getElementById("hideAddMobileId").style.display = "none";
     } else {
       fetch(
         `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
       )
         .then((res) => res.json())
         .then((data) => searchItems(data.data.slice(0, 20)));
+      if (searchMobiles.status == true) {
+        document.getElementById("hideAddToCart").style.display = "block";
+        document.getElementById("hideAddMobileId").style.display = "block";
+      }
       error1.innerText = "";
+      searchField.value = "";
     }
     // show 20 phones on display
     const searchItems = (searchMobiles) => {
       searchMobiles.forEach((searchMobile) => {
         const addToCart = document.getElementById("addToCart");
+        searchField.value = "";
         const div = document.createElement("div");
         div.innerHTML = `<div class="col ">
       <div class="card h-50 border-0 ">
@@ -60,6 +68,7 @@ const getValue = () => {
     };
   };
 };
+
 // show phone details
 const getMobileId = (mobilesId) => {
   console.log(mobilesId);
@@ -89,7 +98,7 @@ const showMobileId = (idDetails) => {
         <b>ChipSet: </b>  ${idDetails.mainFeatures.chipSet} <br>
         <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize} <br>
         <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
-        <b>Storage: </b>  ${idDetails.mainFeatures.sensors} <br>
+        <b>Storage: </b>  ${idDetails.mainFeatures.storage} <br>
       </li>
       <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
       <li class="list-group-item"> 
@@ -119,7 +128,7 @@ const showMobileId = (idDetails) => {
         <b>ChipSet: </b>  ${idDetails.mainFeatures.chipSet} <br>
         <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize} <br>
         <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
-        <b>Storage: </b>  ${idDetails.mainFeatures.sensors} <br>
+        <b>Storage: </b>  ${idDetails.mainFeatures.storage} <br>
         </li>
       <li class="list-group-item"> <b>Sensors: </b>  ${idDetails.mainFeatures.sensors}</li>
       <li class="list-group-item"> 

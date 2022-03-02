@@ -25,3 +25,7 @@ span {
 #spinner {
   display: none;
 }
+#showMore {
+  display: none;
+  color: white;
+}
