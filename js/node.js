@@ -108,22 +108,24 @@ const showMobileId = (idDetails) => {
       }</li>
       <li class="list-group-item"> 
         <b>Bluetooth: </b>  ${
-          idDetails.others ? idDetails.others.Bluetooth : "not found"
+          idDetails.others.Bluetooth
+            ? idDetails.others.Bluetooth
+            : "i not found"
         } <br>
         <b>GPS: </b>   ${
-          idDetails.others ? idDetails.others.GPS : "not found"
+          idDetails.others.GPS ? idDetails.others.GPS : "i not found"
         } <br>
         <b>NFC: </b>   ${
-          idDetails.others ? idDetails.others.NFC : "not found"
+          idDetails.others.NFC ? idDetails.others.NFC : "i not found"
         } <br>
         <b>Radio: </b>   ${
-          idDetails.others ? idDetails.others.Radio : "not found"
+          idDetails.others.Radio ? idDetails.others.Radio : "i not found"
         } <br>
         <b>USB: </b>   ${
-          idDetails.others ? idDetails.others.USB : "not found"
+          idDetails.others.USB ? idDetails.others.USB : "i not found"
         } <br>
         <b>WLAN: </b>   ${
-          idDetails.others ? idDetails.others.WLAN : "not found"
+          idDetails.others.WLAN ? idDetails.others.WLAN : "i not found"
         } 
       </li>
     </ul>
