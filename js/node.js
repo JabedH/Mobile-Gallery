@@ -45,6 +45,8 @@ const getValue = () => {
 
 // show 20 phones on display
 const getItems = (searchMobiles) => {
+  const addMobileId = document.getElementById("addMobileId");
+  addMobileId.innerHTML = "";
   const addToCart = document.getElementById("addToCart");
   addToCart.innerHTML = "";
   searchMobiles.forEach((searchMobile) => {
