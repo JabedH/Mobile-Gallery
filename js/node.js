@@ -21,6 +21,7 @@ const getValue = () => {
     error.innerText = "";
   }
   const searchItems = (searchMobiles) => {
+    // phone checker
     if (searchMobiles.status == false) {
       error1.innerText = "Phone is not found";
       document.getElementById("spinner").style.display = "none";
@@ -32,18 +33,19 @@ const getValue = () => {
       )
         .then((res) => res.json())
         .then((data) => searchItems(data.data.slice(0, 20)));
+      //
       if (searchMobiles.status == true) {
         document.getElementById("hideAddToCart").style.display = "block";
         document.getElementById("hideAddMobileId").style.display = "block";
       }
       error1.innerText = "";
-      searchField.value = "";
     }
     // show 20 phones on display
     const searchItems = (searchMobiles) => {
       searchMobiles.forEach((searchMobile) => {
+        console.log(searchMobile);
         const addToCart = document.getElementById("addToCart");
-        searchField.value = "";
+        // addToCart.innerHTML = "";-
         const div = document.createElement("div");
         div.innerHTML = `<div class="col ">
       <div class="card h-50 border-0 ">
