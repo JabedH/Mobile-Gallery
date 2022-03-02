@@ -84,64 +84,17 @@ const showMobileId = (idDetails) => {
   const addMobileId = document.getElementById("addMobileId");
   addMobileId.innerHTML = "";
   const div = document.createElement("div");
-  if (idDetails.releaseDate == "") {
-    const newReleaseDate = "Not found Release Date";
-    const itemDetails = "Not found";
-    div.innerHTML = `
+  console.log(idDetails);
+  div.innerHTML = `
   <div class="card p-2" style="width: 20rem;">
     <div class="d-flex justify-content-center">
          <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
     </div>
     <div class="card-body">
       <h5 class="card-title">${idDetails.name}</h5>
-      <p>${newReleaseDate}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"> 
-        <b>ChipSet: </b>  ${idDetails.mainFeatures.chipSet} <br>
-        <b>DisplaySize: </b>  ${idDetails.mainFeatures.displaySize} <br>
-        <b>Memory: </b>  ${idDetails.mainFeatures.memory} <br>
-        <b>Storage: </b>  ${idDetails.mainFeatures.storage} <br>
-      </li>
-      <li class="list-group-item"> <b>Sensors: </b>  ${
-        idDetails.mainFeatures.sensors
-      }</li>
-      <li class="list-group-item"> 
-        <b>Bluetooth: </b>  ${
-          idDetails.others.Bluetooth
-            ? idDetails.others.Bluetooth
-            : "i not found"
-        } <br>
-        <b>GPS: </b>   ${
-          idDetails.others.GPS ? idDetails.others.GPS : "i not found"
-        } <br>
-        <b>NFC: </b>   ${
-          idDetails.others.NFC ? idDetails.others.NFC : "i not found"
-        } <br>
-        <b>Radio: </b>   ${
-          idDetails.others.Radio ? idDetails.others.Radio : "i not found"
-        } <br>
-        <b>USB: </b>   ${
-          idDetails.others.USB ? idDetails.others.USB : "i not found"
-        } <br>
-        <b>WLAN: </b>   ${
-          idDetails.others.WLAN ? idDetails.others.WLAN : "i not found"
-        } 
-      </li>
-    </ul>
-  </div>
-  `;
-    addMobileId.appendChild(div);
-  } else {
-    console.log(idDetails);
-    div.innerHTML = `
-  <div class="card p-2" style="width: 20rem;">
-    <div class="d-flex justify-content-center">
-         <img src="${idDetails.image}" class="card-img-top w-50" alt="...">
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">${idDetails.name}</h5>
-      <p>${idDetails.releaseDate}</p>
+      <p>${
+        idDetails.releaseDate ? idDetails.releaseDate : "Not found Release Date"
+      }</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item"> 
@@ -176,6 +129,5 @@ const showMobileId = (idDetails) => {
     </ul> 
   </div>
   `;
-    addMobileId.appendChild(div);
-  }
+  addMobileId.appendChild(div);
 };
