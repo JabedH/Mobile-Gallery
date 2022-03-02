@@ -15,7 +15,6 @@ const getValue = () => {
       .then((res) => res.json())
       .then((data) => {
         temp = data;
-        console.log("temp", temp);
         if (temp.status == false) {
           error1.innerText = "Phone is not found";
           document.getElementById("spinner").style.display = "none";
@@ -74,19 +73,18 @@ const getItems = (searchMobiles) => {
   });
 };
 
-// show phone details
+// get mobiles id
 const getMobileId = (mobilesId) => {
-  console.log(mobilesId);
   fetch(`https://openapi.programming-hero.com/api/phone/${mobilesId}`)
     .then((res) => res.json())
     .then((data) => showMobileId(data.data));
 };
+
+// show phone details
 const showMobileId = (idDetails) => {
-  console.log(idDetails);
   const addMobileId = document.getElementById("addMobileId");
   addMobileId.innerHTML = "";
   const div = document.createElement("div");
-  console.log(idDetails);
   div.innerHTML = `
   <div class="card p-2" style="width: 20rem;">
     <div class="d-flex justify-content-center">
